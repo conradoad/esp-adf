@@ -51,6 +51,8 @@ typedef struct {
     bool                    stack_in_ext;       /*!< Try to allocate stack in external memory */
     int                     multi_out_num;      /*!< The number of multiple output */
     bool                    uninstall_drv;      /*!< whether uninstall the i2s driver when stream destroyed*/
+    int                     ramp_in_ms;         /*!< Ramp in time in ms. Will take effect only in Internal DAC mode */
+    int                     ramp_out_ms;        /*!< Ramp out time in ms. Will take effect only in Internal DAC mode */
     bool                    need_expand;        /*!< whether to expand i2s data */
     i2s_bits_per_sample_t   expand_src_bits;    /*!< The source bits per sample when data expand */
 } i2s_stream_cfg_t;
@@ -87,6 +89,8 @@ typedef struct {
     .stack_in_ext = false,                                                      \
     .multi_out_num = 0,                                                         \
     .uninstall_drv = true,                                                      \
+    .ramp_in_ms = 0,                                                            \
+    .ramp_out_ms = 0,                                                           \
     .need_expand = false,                                                       \
     .expand_src_bits = I2S_BITS_PER_SAMPLE_16BIT,                               \
 }
@@ -116,6 +120,8 @@ typedef struct {
     .stack_in_ext = false,                                                      \
     .multi_out_num = 0,                                                         \
     .uninstall_drv = false,                                                     \
+    .ramp_in_ms = 0,                                                            \
+    .ramp_out_ms = 0,                                                           \
     .need_expand = false,                                                       \
     .expand_src_bits = I2S_BITS_PER_SAMPLE_16BIT,                               \
 }
@@ -144,6 +150,8 @@ typedef struct {
     .stack_in_ext = false,                                                      \
     .multi_out_num = 0,                                                         \
     .uninstall_drv = false,                                                     \
+    .ramp_in_ms = 0,                                                            \
+    .ramp_out_ms = 0,                                                           \
     .need_expand = false,                                                       \
     .expand_src_bits = I2S_BITS_PER_SAMPLE_16BIT,                               \
 }
@@ -173,6 +181,8 @@ typedef struct {
     .stack_in_ext = false,                                                      \
     .multi_out_num = 0,                                                         \
     .uninstall_drv = true,                                                      \
+    .ramp_in_ms = 0,                                                            \
+    .ramp_out_ms = 0,                                                           \
     .need_expand = false,                                                       \
     .expand_src_bits = I2S_BITS_PER_SAMPLE_16BIT,                               \
 }
@@ -202,6 +212,8 @@ typedef struct {
     .stack_in_ext = false,                                                      \
     .multi_out_num = 0,                                                         \
     .uninstall_drv = false,                                                     \
+    .ramp_in_ms = 0,                                                            \
+    .ramp_out_ms = 0,                                                           \
     .need_expand = false,                                                       \
     .expand_src_bits = I2S_BITS_PER_SAMPLE_16BIT,                               \
 }
@@ -230,6 +242,8 @@ typedef struct {
     .stack_in_ext = false,                                                      \
     .multi_out_num = 0,                                                         \
     .uninstall_drv = false,                                                     \
+    .ramp_in_ms = 0,                                                            \
+    .ramp_out_ms = 0,                                                           \
     .need_expand = false,                                                       \
     .expand_src_bits = I2S_BITS_PER_SAMPLE_16BIT,                               \
 }

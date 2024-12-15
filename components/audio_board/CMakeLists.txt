@@ -97,4 +97,22 @@ set(COMPONENT_SRCS
 )
 endif()
 
+if (CONFIG_ESP32_S3_BOX_BOARD)
+message(STATUS "Current board name is " CONFIG_ESP32_S3_BOX_BOARD)
+list(APPEND COMPONENT_ADD_INCLUDEDIRS ./esp32_s3_box)
+set(COMPONENT_SRCS
+./esp32_s3_box/board.c
+./esp32_s3_box/board_pins_config.c
+)
+endif()
+
+if (CONFIG_AUDIO_BOARD_CUSTOM)
+message(STATUS "Current board name is " CONFIG_AUDIO_BOARD_CUSTOM)
+list(APPEND COMPONENT_ADD_INCLUDEDIRS ./custom_board)
+set(COMPONENT_SRCS
+./custom_board/board.c
+./custom_board/board_pins_config.c
+)
+endif()
+
 register_component()

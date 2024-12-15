@@ -225,6 +225,29 @@ static int _i2s_read(audio_element_handle_t self, char *buffer, int len, TickTyp
     return bytes_read;
 }
 
+// static void i2s_add_ramps(audio_element_info_t *info, i2s_stream_cfg_t i2s_strm_cfg, uint8_t *sBuff, uint32_t *len) {
+
+//     uint32_t ramp_in_samples = info->sample_rates * (i2s_strm_cfg.ramp_in_ms / 1000);
+//     uint8_t rampInBuff[ramp_in_samples];
+
+//     if (info->ramp_in_step > 0) {
+//         int16_t *buf16 = (int16_t *)sBuff;
+//         int k = *len >> 1;
+//         for (int i = 0; i < k; i++) {
+//             buf16[i] = buf16[i] * info->ramp_in_step / I2S_RAMP_STEP;
+//         }
+//         info->ramp_in_step -= I2S_RAMP_STEP;
+//     }
+//     if (info->ramp_out_step > 0) {
+//         int16_t *buf16 = (int16_t *)sBuff;
+//         int k = *len >> 1;
+//         for (int i = 0; i < k; i++) {
+//             buf16[i] = buf16[i] * info->ramp_out_step / I2S_RAMP_STEP;
+//         }
+//         info->ramp_out_step -= I2S_RAMP_STEP;
+//     }
+// }
+
 static int _i2s_write(audio_element_handle_t self, char *buffer, int len, TickType_t ticks_to_wait, void *context)
 {
     i2s_stream_t *i2s = (i2s_stream_t *)audio_element_getdata(self);
@@ -232,7 +255,14 @@ static int _i2s_write(audio_element_handle_t self, char *buffer, int len, TickTy
     size_t bytes_written = 0;
     audio_element_info_t info;
     audio_element_getinfo(self, &info);
+
+
     if (len > 0) {
+// #if SOC_I2S_SUPPORTS_ADC_DAC
+//         if ((i2s->config.i2s_config.mode & I2S_MODE_DAC_BUILT_IN) != 0) {
+//             i2s_add_ramps(&info, i2s->config, (uint8_t *)buffer, &len);
+//         }
+// #endif
 #ifdef CONFIG_IDF_TARGET_ESP32
         if (info.channels == 1) {
             i2s_mono_fix(info.bits, (uint8_t *)buffer, len);
